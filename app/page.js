@@ -14,7 +14,7 @@ const data = {
       borderColor: '#437EF7',
       borderWidth: 1,
       data: [25, 50, 75, 100, 50, 75, 100, 50, 75, 100, 25, 75],
-      barThickness: 28,
+      barThickness: 12,
     },
     {
       label: 'Build-ups',
@@ -22,7 +22,7 @@ const data = {
       borderColor: '#5CB1FF',
       borderWidth: 1,
       data: [35, 65, 80, 95, 45, 70, 85, 60, 80, 95, 30, 85],
-      barThickness: 28, 
+      barThickness: 12, 
     },
   ],
 };
@@ -50,20 +50,35 @@ const options = {
       grid: {
         borderColor: 'rgba(0,0,0,0.1)',
         borderWidth: 1
-      }
+      },
+      stacked: true, // Çubukları dikey olarak üst üste yığ
     },
     x: {
       grid: {
         borderColor: 'rgba(0,0,0,0.1)',
         borderWidth: 1
+      },
+      stacked: true, // Çubukları dikey olarak üst üste yığ
+    }
+  },
+  plugins: {
+    legend: {
+      display: false // Gerekirse efsaneyi gizle
+    },
+    tooltip: {
+      callbacks: {
+        label: function(tooltipItem) {
+          return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+        }
       }
     }
   }
 };
 
+
 export default function Home() {
   return (
-<div className='d-flex '>
+<div className='d-flex gap-2'>
       {/* Sol Sidebar */}
       <div className='nns'>
         <div className='d-flex my-3' style={{height:"100vh"}}> 
@@ -146,7 +161,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='d-flex gap-2 align-items-center'>
+          <div className='d-flex gap-2 align-items-center my-2'>
             <button className="btn btn-outline-secondary text-dark">Edit section</button>
             <button className="btn btn-primary">Add Item</button>
             <button className='btn btn-hamburger d-block d-md-none'>
@@ -227,7 +242,7 @@ export default function Home() {
                 </div>
               <div className='border-top mt-3'>
                 <div className='d-flex justify-content-between align-items-center px-4'>
-                <p className='text-secondary m-0'>Data graph</p>
+                <p className='text-secondary m-0 d-none d-md-inline'>Data graph</p>
                 <button className="btn text-primary mt-2 border-0"  >Open <img src="external link.svg" alt="" /></button>
                 </div>
               </div>
@@ -235,7 +250,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center flx-h1">
     <h1  className="mb-2 mb-md-0" style={{fontSize:"18px"}}>Brian Ford</h1>
     <div className='d-flex gap-2'>
         <button className="btn btn-outline-secondary text-dark">Edit section</button>
