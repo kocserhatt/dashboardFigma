@@ -132,6 +132,24 @@ export default function Home() {
                 <span>Teams</span>
               </a>
           </div>
+          <div className='d-flex justify-content-between align-items-center my-4'>
+            <div className='d-flex align-items-center gap-2 '>
+              <img src="anonim/Avatar (4).png" alt="" />
+              <h1 style={{fontSize:"18px"}}>Brian Ford</h1>
+            </div>
+            <button className='btn-hamburger btn'><img src="dot menu.svg" alt="" /></button>
+          </div>
+          <div className='card '>
+            <div className='d-flex justify-content-between my-3  '>
+              <img src="Progress circle.svg" alt="" />
+              <button className='btn'><img src="close cross.svg" alt="" /></button>  
+            </div>
+            <div>
+              <h1 style={{fontSize:"15px"}}>Subscription Plan</h1>
+              <p>Your Subscription plan will expire soon please upgrade!</p>
+              <button className="btn text-primary">Upgrade</button>
+            </div>
+          </div>
           </div>
         </div>
       </div>
