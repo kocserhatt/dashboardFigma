@@ -135,20 +135,25 @@ export default function Home() {
           <div className='hdr'>
           <div className="row">
             <div className="col">
-            <div className="header-conteiner-one d-flex none">
-       <p className="d-flex align-items-center gap-2">Home <img src="right.svg" alt="" /></p>
-       <p className="d-flex align-items-center gap-2">Setting <img src="right.svg" alt="" /></p>
-       <p className="text-primary d-flex align-items-center gap-2">General <img src="right.svg" alt="" /></p>
-   </div>
+            <div className="header-conteiner-one d-flex">
+                <p className="d-flex align-items-center gap-2 d-none d-md-inline">Home <img src="right.svg" alt="" /></p>
+                <p className="d-flex align-items-center gap-2 d-none d-md-inline">Setting <img src="right.svg" alt="" /></p>
+                <p className="text-primary d-flex align-items-center gap-2 d-none d-md-inline">General <img src="right.svg" alt="" /></p>
+                <p className="d-flex align-items-center gap-2 d-inline d-md-none"><img style={{transform: "rotate(180deg)",  width: "16px", height: "auto", }} src="right.svg" alt="" />Back </p>
+            </div>
               <h1>Hey there, Brian Ford!</h1>
               <p>Welcome back, we’re happy to have you here!</p>
             </div>
           </div>
-              <div className='button gap-2'>
-                <button className="btn btn-outline-primary">Edit section</button>
-                <button className="btn btn-primary">Add Item</button>
-                <button className='btn-hamburger btn '><img src="dot menu.svg" alt="" />
-                </button></div>
+
+          <div className='d-flex gap-2 align-items-center'>
+            <button className="btn btn-outline-secondary text-dark">Edit section</button>
+            <button className="btn btn-primary">Add Item</button>
+            <button className='btn btn-hamburger d-block d-md-none'>
+              <img src="dot menu.svg" alt="" className="img-fluid" style={{ maxWidth: '24px', height: 'auto' }} />
+            </button>
+          </div>
+
           </div>
 
             {/* Revenue Card */}
@@ -229,6 +234,18 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <h1  className="mb-2 mb-md-0" style={{fontSize:"18px"}}>Brian Ford</h1>
+    <div className='d-flex gap-2'>
+        <button className="btn btn-outline-secondary text-dark">Edit section</button>
+        <button className="btn btn-primary">Add Item</button>
+        <button className='btn btn-hamburger d-block d-md-none'>
+            <img src="dot menu.svg" alt="" className="img-fluid" style={{ maxWidth: '24px', height: 'auto' }} />
+        </button>
+    </div>
+</div>
+
 
           <div className="row mt-4">
             {/* Lookscout Team */}
