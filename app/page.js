@@ -510,7 +510,7 @@ export default function Home() {
                                                     </div>
                                                     <div className="list-content">
                                                         <b className='color-white'>Gitlab Team</b>
-                                                        <p className="fs-6 color-gray" >Jan 215 2022</p>
+                                                        <p className="fs-6 color-gray" >Jan 15 2022</p>
                                                     </div>
                                             </div>
                                             <button className="footer-bg2">Done</button>
