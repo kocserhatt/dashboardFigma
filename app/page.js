@@ -77,6 +77,9 @@ const options = {
 
 
 export default function Home() {
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
   const [isDarkMode, setIsDarkMode] = useState(false);
   
     useEffect(() => {
@@ -86,16 +89,156 @@ export default function Home() {
     const toggleMode = () => {
       setIsDarkMode(!isDarkMode);
     };
+
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
+  
+    const closeMenu = () => {
+      setIsMenuOpen(false);
+    };
+  
+    const handleClickOutside = (event) => {
+      const menu = document.querySelector('.side-menu');
+      const button = document.querySelector('.navbar-toggler');
+      if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
+        closeMenu();
+      }
+    };
+  
+    useEffect(() => {
+      if (isMenuOpen) {
+        document.addEventListener('click', handleClickOutside);
+      } else {
+        document.removeEventListener('click', handleClickOutside);
+      }
+  
+      return () => {
+        document.removeEventListener('click', handleClickOutside);
+      };
+    }, [isMenuOpen]);
   return (
     <>
     <div>
     <div className='none-navbar'>
       <div className='navbar'>
-      <span>{isDarkMode? <img src="dark/Company Logo (1).svg" alt=""/> : <img src="Company Logo.svg" alt="" />}</span>
-        <span>{isDarkMode? <img src="dark/big.svg" alt="" width={40} height={40} /> : <img src="big.svg" alt="" width={40} height={40} />}</span>
+        <span>
+          {isDarkMode ? (
+            <img src="dark/Company Logo (1).svg" alt="Company Logo" />
+          ) : (
+            <img src="Company Logo.svg" alt="Company Logo" />
+          )}
+        </span>
+        <button className="navbar-toggler " type="button" onClick={toggleMenu}>
+        <span>
+          {isDarkMode ? (
+            <img src="dark/big.svg" alt="Icon" width={40} height={40} />
+          ) : (
+            <img src="big.svg" alt="Icon" width={40} height={40} />
+          )}
+        </span>
+        </button>
+      </div>
+
+      <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
+        <button className="close-menu" onClick={closeMenu}>
+          &times;
+        </button>
+        <ul class="list-unstyled">
+  <div class="d-flex align-items-center gap-2">
+    <img src="anonim/Avatar (4).png" alt="" />
+    <h1 class="sidebar-name" style={{ fontSize: "18px" }}>Brian Ford</h1>
+  </div>
+
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 " href="#" id="dropdownDashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="side/horizontal.svg" alt="" />
+      <span class="color-white">Dashboard</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownDashboard">
+    <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/horizontal.svg" />
+                <span>General</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/mail.svg" />
+                <span>Messages</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/2.svg" />
+                <span>Notifications</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex  align-items-center gap-3 text-decoration-none">
+                <img src="side/user.svg" />
+                <span>Users</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/circle.svg" />
+                <span>Events & Logs</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/bank.svg" />
+                <span>Organization</span>
+              </a>
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+                <img src="side/note.svg" />
+                <span>Teams</span>
+              </a>
+    </ul>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDate" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="side/calendar.svg" alt="" />
+      <span class="color-white">Date</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownDate">
+      <li><a class="dropdown-item" href="#">Aylık Görünüm</a></li>
+      <li><a class="dropdown-item" href="#">Haftalık Görünüm</a></li>
+      <li><a class="dropdown-item" href="#">Günlük Görünüm</a></li>
+      <li><a class="dropdown-item" href="#">Etkinlikler</a></li>
+    </ul>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDeneme" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="side/alt.svg" alt="" />
+      <span class="color-white">Deneme</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownDeneme">
+      <li><a class="dropdown-item" href="#">Bar Charts</a></li>
+      <li><a class="dropdown-item" href="#">Sales Data</a></li>
+      <li><a class="dropdown-item" href="#">Performance Metrics</a></li>
+    </ul>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="gear 1.svg" alt="" />
+      <span class="color-white">Settings</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownSettings">
+      <li><a class="dropdown-item" href="#">Account Settings</a></li>
+      <li><a class="dropdown-item" href="#">Privacy Settings</a></li>
+      <li><a class="dropdown-item" href="#">Notification Settings</a></li>
+      <li><a class="dropdown-item" href="#">Language & Region</a></li>
+    </ul>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link d-flex align-items-center gap-2" href="#">
+      <img src="exit.svg" alt="" />
+      <span class="color-white">Out</span>
+    </a>
+  </li>
+</ul>
+
       </div>
     </div>
-</div>
+    </div>
 <div className='body'>
 <div className='d-flex gap-2'>
       {/* Sol Sidebar */}
@@ -104,14 +247,14 @@ export default function Home() {
           <div className='col-3 d-flex flex-column align-items-center justify-content-between'>
             <div className='d-flex flex-column align-items-center gap-3'>
               <a href="">{isDarkMode? <img src="dark/Logo Glyphs (1).svg" alt="" /> : <img src="side/Logo.svg" alt="" />}</a>
-              <a href=""><img src="side/zoom.svg" alt="" /></a>
-              <a href=""><img src="side/horizontal.svg" alt="" /></a>
-              <a href=""><img src="side/calendar.svg" alt="" /></a>
-              <a href=""><img src="side/alt.svg" alt="" /></a>
+              <a href="#"><img src="side/zoom.svg" alt="" /></a>
+              <a href="#"><img src="side/horizontal.svg" alt="" /></a>
+              <a href="#"><img src="side/calendar.svg" alt="" /></a>
+              <a href="#"><img src="side/alt.svg" alt="" /></a>
             </div>
             <div className='d-flex flex-column align-items-center gap-3 mb-5 '>
-              <a href=""><img src="side/2.svg" alt="" /></a>
-              <a href=""><img src="side/mail.svg" alt="" /></a>
+              <a href="#"><img src="side/2.svg" alt="" /></a>
+              <a href="#"><img src="side/mail.svg" alt="" /></a>
             </div>
           </div>
 
@@ -122,31 +265,31 @@ export default function Home() {
                 <input type="text" className="w-100 ps-5 sidebar-input-color" placeholder="Search here.."/>
             </div>
             <div className="d-flex flex-column gap-3 mt-5">
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/horizontal.svg" />
                 <span>General</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/mail.svg" />
                 <span>Messages</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/2.svg" />
                 <span>Notifications</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex  align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex  align-items-center gap-3 text-decoration-none">
                 <img src="side/user.svg" />
                 <span>Users</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/circle.svg" />
                 <span>Events & Logs</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/bank.svg" />
                 <span>Organization</span>
               </a>
-              <a href="/" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
+              <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/note.svg" />
                 <span>Teams</span>
               </a>

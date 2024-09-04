@@ -168,7 +168,6 @@
 
 
 
-
 /* From Uiverse.io by andrew-demchenk0 */ 
 .switch {
   font-size: 17px;
@@ -311,6 +310,85 @@ h1 {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(---body-bg);
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.side-menu ul {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.side-menu ul li {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.side-menu ul li img {
+  margin-right: 10px; /* İkon ile metin arasındaki boşluk */
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar-toggler {
+  background-color: transparent;
+  border: none;
+}
+
+.navbar-toggler-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #FFF; /* İkonun rengini beyaz yapıyoruz */
+  display: block;
+  margin: 6px 0;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  font-size: 40px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #FFF; /* Kapatma tuşunun rengini beyaz yapıyoruz */
+  cursor: pointer;
+}
+
+
+
+.accordion-button {
+  /* Varsayılan buton stili */
+  background-color: #f8f9fa; /* Örneğin, açık gri */
+}
+
+.accordion-button:not(.collapsed) {
+  /* Açık durumda olan buton stili */
+  background-color: #e9ecef; /* Örneğin, daha koyu gri */
+}
+
+.accordion-body {
+  /* İçerik alanının stili */
+  padding: 1rem;
+}
+
 
 p {
   font-size: 14px;
