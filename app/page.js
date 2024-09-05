@@ -82,17 +82,23 @@ export default function Home() {
   }, []);
 
 
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('isDarkMode');
-    return savedTheme === 'true' ? true : false;
-  });
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
-
-    localStorage.setItem('isDarkMode', isDarkMode ? 'true' : 'false');
+    // Tarayıcı ortamında olduğumuzdan emin olalım (client-side)
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('isDarkMode');
+      setIsDarkMode(savedTheme === 'true');
+    }
+  }, []);
+  
+  useEffect(() => {
+    // Tarayıcı ortamında olduğumuzdan emin olalım (client-side)
+    if (typeof window !== 'undefined') {
+      document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
+      localStorage.setItem('isDarkMode', isDarkMode ? 'true' : 'false');
+    }
   }, [isDarkMode]);
-
   const toggleMode = () => {
     setIsDarkMode(!isDarkMode);
   };
