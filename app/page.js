@@ -80,16 +80,23 @@ export default function Home() {
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
-    useEffect(() => {
-      document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
-    }, [isDarkMode]);
-  
-    const toggleMode = () => {
-      setIsDarkMode(!isDarkMode);
-    };
 
+
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('isDarkMode');
+    return savedTheme === 'true' ? true : false;
+  });
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
+
+    localStorage.setItem('isDarkMode', isDarkMode ? 'true' : 'false');
+  }, [isDarkMode]);
+
+  const toggleMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+    
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -145,20 +152,28 @@ export default function Home() {
 
       <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
         <button className="close-menu" onClick={closeMenu}>
-          &times;
+        <span>{isDarkMode? <img src="close (1).png" alt="" /> : <img src="close (2).png" alt="" />}</span>
         </button>
-        <ul class="list-unstyled">
-  <div class="d-flex align-items-center gap-2">
+        <ul className="list-unstyled">
+  <div className="d-flex align-items-center gap-2">
     <img src="anonim/Avatar (4).png" alt="" />
-    <h1 class="sidebar-name" style={{ fontSize: "18px" }}>Brian Ford</h1>
+    <h1 className="sidebar-name" style={{ fontSize: "18px" }}>Brian Ford</h1>
+    <div className=''>
+        <label className="switch">
+            <span className="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
+            <span className="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
+            <input type="checkbox" className="input" checked={isDarkMode} onChange={toggleMode}/>
+            <span className="slider"></span>
+        </label>
+    </div>
   </div>
 
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 " href="#" id="dropdownDashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <li className="nav-item dropdown ">
+    <a className="nav-link dropdown-toggle d-flex align-items-center gap-2 " href="#" id="dropdownDashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="side/horizontal.svg" alt="" />
-      <span class="color-white">Dashboard</span>
+      <span className="color-white">Dashboard</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownDashboard">
+    <ul className="dropdown-menu" aria-labelledby="dropdownDashboard">
     <a href="#" className="sidebar-input-color d-flex align-items-center gap-3 text-decoration-none">
                 <img src="side/horizontal.svg" />
                 <span>General</span>
@@ -190,48 +205,48 @@ export default function Home() {
     </ul>
   </li>
 
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDate" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <li className="nav-item dropdown">
+    <a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDate" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="side/calendar.svg" alt="" />
-      <span class="color-white">Date</span>
+      <span className="color-white">Date</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownDate">
-      <li><a class="dropdown-item" href="#">Aylık Görünüm</a></li>
-      <li><a class="dropdown-item" href="#">Haftalık Görünüm</a></li>
-      <li><a class="dropdown-item" href="#">Günlük Görünüm</a></li>
-      <li><a class="dropdown-item" href="#">Etkinlikler</a></li>
+    <ul className="dropdown-menu" aria-labelledby="dropdownDate">
+      <li><a className="dropdown-item" href="#">Aylık Görünüm</a></li>
+      <li><a className="dropdown-item" href="#">Haftalık Görünüm</a></li>
+      <li><a className="dropdown-item" href="#">Günlük Görünüm</a></li>
+      <li><a className="dropdown-item" href="#">Etkinlikler</a></li>
     </ul>
   </li>
 
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDeneme" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <li className="nav-item dropdown">
+    <a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownDeneme" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="side/alt.svg" alt="" />
-      <span class="color-white">Deneme</span>
+      <span className="color-white">Deneme</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownDeneme">
-      <li><a class="dropdown-item" href="#">Bar Charts</a></li>
-      <li><a class="dropdown-item" href="#">Sales Data</a></li>
-      <li><a class="dropdown-item" href="#">Performance Metrics</a></li>
+    <ul className="dropdown-menu" aria-labelledby="dropdownDeneme">
+      <li><a className="dropdown-item" href="#">Bar Charts</a></li>
+      <li><a className="dropdown-item" href="#">Sales Data</a></li>
+      <li><a className="dropdown-item" href="#">Performance Metrics</a></li>
     </ul>
   </li>
 
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <li className="nav-item dropdown">
+    <a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="dropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="gear 1.svg" alt="" />
-      <span class="color-white">Settings</span>
+      <span className="color-white">Settings</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownSettings">
-      <li><a class="dropdown-item" href="#">Account Settings</a></li>
-      <li><a class="dropdown-item" href="#">Privacy Settings</a></li>
-      <li><a class="dropdown-item" href="#">Notification Settings</a></li>
-      <li><a class="dropdown-item" href="#">Language & Region</a></li>
+    <ul className="dropdown-menu" aria-labelledby="dropdownSettings">
+      <li><a className="dropdown-item" href="#">Account Settings</a></li>
+      <li><a className="dropdown-item" href="#">Privacy Settings</a></li>
+      <li><a className="dropdown-item" href="#">Notification Settings</a></li>
+      <li><a className="dropdown-item" href="#">Language & Region</a></li>
     </ul>
   </li>
 
-  <li class="nav-item">
-    <a class="nav-link d-flex align-items-center gap-2" href="#">
+  <li className="nav-item">
+    <a className="nav-link d-flex align-items-center gap-2" href="#">
       <img src="exit.svg" alt="" />
-      <span class="color-white">Out</span>
+      <span className="color-white">Out</span>
     </a>
   </li>
 </ul>
@@ -253,8 +268,16 @@ export default function Home() {
               <a href="#"><img src="side/alt.svg" alt="" /></a>
             </div>
             <div className='d-flex flex-column align-items-center gap-3 mb-5 '>
-              <a href="#"><img src="side/2.svg" alt="" /></a>
-              <a href="#"><img src="side/mail.svg" alt="" /></a>
+            <div className=''>
+                <label className="switch">
+                  <span className="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
+                  <span className="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
+                  <input type="checkbox" className="input" checked={isDarkMode} onChange={toggleMode}/>
+                  <span className="slider"></span>
+                </label>
+                </div>
+              <a href="#"><img src="gear 1.svg" alt="" /></a>
+              <a href="#"><img src="exit.svg" alt="" /></a>
             </div>
           </div>
 
@@ -330,16 +353,8 @@ export default function Home() {
                 <p className="d-flex align-items-center gap-2 d-none d-md-inline home-color">Home {isDarkMode? <img src="dark/okDark.svg" alt="" /> : <img src="ok.svg" alt="" />}</p>
                 <p className="d-flex align-items-center gap-2 d-none d-md-inline home-color">Setting{isDarkMode? <img src="dark/okDark.svg" alt="" /> : <img src="ok.svg" alt="" />}</p>
                 <p className="text-primary d-flex align-items-center gap-2 d-none d-md-inline home-color">General</p>
-                <p className="d-flex align-items-center gap-2 d-inline d-md-none home-color">{isDarkMode? <img src="dark/okDark.svg" alt="" style={{transform: "rotate(180deg)",  width: "16px", height: "auto", }} /> : <img src="ok.svg" alt="" />}Back </p>
+                <p className="d-flex align-items-center gap-2 d-inline d-md-none home-color">{isDarkMode? <img src="dark/okDark.svg" alt="" style={{transform: "rotate(180deg)",  width: "16px", height: "auto", }} /> : <img src="ok.svg" alt="" style={{transform: "rotate(180deg)",  width: "16px", height: "auto", }} />}Back </p>
               </div>
-                <div className=''>
-                <label className="switch">
-                  <span className="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
-                  <span className="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
-                  <input type="checkbox" className="input" checked={isDarkMode} onChange={toggleMode}/>
-                  <span className="slider"></span>
-                </label>
-                </div>
             </div>
               <h1 className='color-white'>Hey there, Brian Ford!</h1>
               <p className='color-gray'>Welcome back, we’re happy to have you here!</p>
@@ -458,7 +473,7 @@ export default function Home() {
                             <div className="card-bg">  
                                 <ul className="list-group-ul list-group list-group-flush p-3 ">
                                     <li className="list-group-item-header d-flex align-items-center justify-content-between p-2 color-white"  >
-                                        <h1 style={{fontSize:"16px"}}>Lookscout Team</h1> <img src="Dropdownbutton.svg" alt="" />
+                                        <h1 style={{fontSize:"16px"}}>Lookscout Team</h1>
                                         <span>{isDarkMode? <img src="dark/dot menu (1).svg" alt="" /> : <img src="dot menu.svg" alt="" />}</span>
                                     </li>
                                     <li className="list-group-item-li d-flex align-items-center justify-content-between gap-4" >
