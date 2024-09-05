@@ -145,12 +145,12 @@ export default function Home() {
             <img src="Company Logo.svg" alt="Company Logo" />
           )}
         </span>
-        <button className="navbar-toggler " type="button" onClick={toggleMenu}>
+        <button className=" nav-btn " type="button" onClick={toggleMenu}>
         <span>
           {isDarkMode ? (
             <img src="dark/big.svg" alt="Icon" width={40} height={40} />
           ) : (
-            <img src="big.svg" alt="Icon" width={40} height={40} />
+            <img src="big.svg" alt="Icon" width={40} height={40}  />
           )}
         </span>
         </button>
